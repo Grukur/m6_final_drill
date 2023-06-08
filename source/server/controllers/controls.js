@@ -1,41 +1,59 @@
 
 const fs = require('fs');
 const { v4: uuid } = require('uuid');
+const { leerArchivo } = require('./utils');
 
 class Anime {
-    constructor(id, nombre, genero, anio, autor) {
-        this.id = id;
+    constructor(nombre, genero, año, autor) {
         this.nombre = nombre;
         this.genero = genero;
-        this.anio = anio;
+        this.año = año;
         this.autor = autor;
     }
-    findAll() {
-        let result = [];
-        let resultadoJson = fs.readFileSync('./bbdd/anime.json', 'utf8')
-        let resultado = JSON.parse(resultadoJson)
-        for (let i in resultado) {
-                result.push(resultado[i])           
-        }
-        return result
+    
+    async findAll() {
+        let data = await leerArchivo('anime.json')
+        let base = [];
+        let objetos = await Object.entries(data).map((manga, index) => {
+            let objeto = manga[1]
+            objeto.id = manga[0]
+            base.push(objeto)
+        })
+        return base
+  
     }
 
-    findById(id) {
-        let anime = this.findAll()
-        return (anime[id])
+    async findById(id) {
+        let animes = await this.findAll()
+        if(id.length < 3){
+            let result = animes.find(anime => anime.id == id)
+            console.log(result)
+            return result
+        } else {
+            console.log(id.length)
+            let result = animes.find(anime => anime.genero == id)
+            console.log(result)
+            return result
+        }
     }
-    create(){
+    async create(){
+        let results = await this.findAll()
         let newAnime = {
-            id: uuid().slice(0,4),
+            id: uuid().slice(0,2),
             nombre: this.nombre,
             genero: this.genero,
-            anio: this.anio,
+            año: this.año,
             autor: this.autor
         }
-        let results = this.findAll()
         results.push(newAnime)
-        fs.writeFileSync('./bbdd/anime.json', JSON.stringify(results))
+        fs.writeFileSync('./db/anime.json', JSON.stringify(results))
         return newAnime
+    }
+    async delete(id){
+        let todos = await this.findAll()
+        todos = todos.filter(anime => anime.id != id);
+        fs.writeFileSync('anime.json', JSON.stringify(todos));
+        return todos
     }
 }
 
