@@ -53,7 +53,7 @@ app.get("/animes/:id", async (req, res) => {
 
 //RUTAS ENDPOINT
 //Crea anime
-app.post('/animesCrear', async (req, res) => {
+app.post('/animes', async (req, res) => {
     try {
         let {nombre, genero, año, autor} = req.body;
         console.log(nombre, genero, año, autor)
@@ -72,11 +72,18 @@ app.post('/animesCrear', async (req, res) => {
         })
     }
 })
+//Elimina anime
+app.delete('/animes/:id', async (req, res) => {
+    try{
+        let {id} = req.params;
+        let trash = new Anime;
+        trash.delete(id);
+    } catch (error){
+        console.log(error)
+    }
+})
+
 //Actualiza anime
 app.put('/animes', (req, res) => {
-
 })
-//Elimina anime
-app.delete('/animes', (req, res) => {
 
-})
