@@ -84,6 +84,22 @@ app.delete('/animes/:id', async (req, res) => {
 })
 
 //Actualiza anime
-app.put('/animes', (req, res) => {
+app.put('/animes', async (req, res) => {
+    try{
+        let {id, nombre, genero, año, autor} = req.body;
+        let newUser = new Anime(nombre, genero, año, autor);
+        let respuesta = await newUser.update(id);
+        console.log(respuesta)
+        if(respuesta){
+            res.status(200).send({ code:200, message:'whohu! Exito!'})
+        }else{
+            res.status(500).send({
+                code:500,
+                message:'Algo salió muy mal..... :O'
+            })
+        }
+    }catch(error){
+        console.log(error)
+    }
 })
 

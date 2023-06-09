@@ -39,6 +39,20 @@
         "nombre": "Titan",
         "genero": "Pop",
         "año": "2010",
-        "autor": "Darold"
+        "autor": "Carlitos"
+    },
+    {
+        "id": "6",
+        "nombre": "Carlos",
+        "genero": "Jasmin",
+        "año": "Paloma",
+        "autor": "MOJOJO"
+    },
+    {
+        "id": "7",
+        "nombre": "Darold",
+        "genero": "Accion",
+        "año": "2023",
+        "autor": "Clases"
     }
 ]

@@ -1,4 +1,3 @@
-
 {{!-- Formulario para la creacion de registros en anime --}}
 <h1 class="my-2 text-center">App de anime kwaii</h1>
 
@@ -56,9 +55,9 @@
 <script>
     const updateBtn = document.querySelectorAll(".updateBtn");
     const deleteBtn = document.querySelectorAll(".deleteBtn");
-
+    let id;
     //Muestra el formulario y oculta botones
-    formShow.addEventListener('click', ()=>{
+    formShow.addEventListener('click', () => {
         form.classList.replace("d-none", "d-block");
         formShow.classList.replace("d-block", "d-none");
         updateform.classList.replace("d-block", "d-none");
@@ -66,7 +65,7 @@
         formCreateUser.reset()
 
     })
-    
+
     // capturamos todos los botones actualizar y capturamos la data de su fila
     for (let i = 0; i < updateBtn.length; i++) {
         updateBtn[i].addEventListener("click", (event) => {
@@ -75,59 +74,98 @@
             createForm.classList.replace("d-block", "d-none");
             updateform.classList.replace("d-none", "d-block");
             formShow.classList.replace("d-none", "d-block");
-            
+
 
             let path = event.srcElement.offsetParent.nextSibling.parentElement.cells
-            
+
+            id = path[0].innerText;
             createNombre.value = path[1].innerText;
             createGenero.value = path[2].innerText;
             createAño.value = path[3].innerText;
             createAutor.value = path[4].innerText;
         });
     }
-    
+
     //capturamos el evento submit del formualrio para agregar y modificar
     let formCreateUser = document.getElementById('formCreateUser')
     formCreateUser.addEventListener("submit", async (event) => {
         event.preventDefault();
-        console.log('Capturando Formulario');
-        try {
-            const raw = JSON.stringify({
-                "nombre":createNombre.value,
-                "genero":createGenero.value,
-                "año":createAño.value,
-                "autor":createAutor.value
-            })
+        let selector = event.submitter.id
+        if (selector == "createForm") {
 
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
+            console.log('Capturando Anime nuevo');
+            try {
+                const raw = JSON.stringify({
+                    "nombre": createNombre.value,
+                    "genero": createGenero.value,
+                    "año": createAño.value,
+                    "autor": createAutor.value
+                })
 
-            let response = await fetch("/animes", {
-                method: "POST",
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            });
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
 
-            let data = await response.json();
-            if (data.code == 201) {
-                alert("Usuario creado con éxito.")
-                formCreateUser.reset();
-                location.reload();
-            } else {
-                throw new Error("Error al guardar los datos en la BD.")
+                let response = await fetch("/animes", {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                });
+
+                let data = await response.json();
+                if (data.code == 201) {
+                    alert("Usuario creado con éxito.")
+                    formCreateUser.reset();
+                    location.reload();
+                } else {
+                    throw new Error("Error al guardar los datos en la BD.")
+                }
+            } catch (error) {
+                alert(error.message)
             }
-        } catch (error) {
-            alert(error.message)
+        } else if (selector == 'updateform') {
+            console.log('Actualizando Anime');
+            try {
+                const raw = JSON.stringify({
+                    "id": id,
+                    "nombre": createNombre.value,
+                    "genero": createGenero.value,
+                    "año": createAño.value,
+                    "autor": createAutor.value
+                })
+
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                let response = await fetch("/animes", {
+                    method: "PUT",
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                });
+
+                let data = await response.json();
+                if (data.code == 200) {
+                    alert("Usuario modificado con éxito.")
+                    formCreateUser.reset();
+                    location.reload();
+                } else {
+                    throw new Error("Error al modificar los datos en la BD.")
+                }
+            } catch (error) {
+                alert(error.message)
+            }
         }
     })
 
+
+
     // capturamos todos los botones eliminar y eliminamos el valor correspondiente
     for (let i = 0; i < deleteBtn.length; i++) {
-        deleteBtn[i].addEventListener("click", (event) => {        
+        deleteBtn[i].addEventListener("click", (event) => {
 
             let path = event.srcElement.offsetParent.nextSibling.parentElement.cells
-            
+
             let id = path[0].innerText;
 
             var requestOptions = {
@@ -135,7 +173,7 @@
                 redirect: 'follow'
             };
 
-            fetch("http://localhost:3000/animes/"+id, requestOptions)
+            fetch("http://localhost:3000/animes/" + id, requestOptions)
                 .then(response => response.json())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));

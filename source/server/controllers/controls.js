@@ -17,7 +17,6 @@ class Anime {
         let objetos = await Object.entries(data).map((manga, id) => {
             let objeto = manga[1]
             objeto.id = manga[0]
-            console.log(manga)
             base.push(objeto)
         })
         return base
@@ -53,6 +52,22 @@ class Anime {
         todos = todos.filter(anime => anime.id != id);
         escribirArchivo('anime.json', todos);
         return todos
+    }
+    async update(id){
+        let identificador = id || this.id;
+        let todos = await this.findAll()
+        let newAnime = todos.find(anime => anime.id == identificador);
+
+        if ( newAnime ) {
+            newAnime.nombre = this.nombre;
+            newAnime.genero = this.genero;
+            newAnime.año = this.año;
+            newAnime.autor = this.autor;
+            await escribirArchivo('anime.json', todos);
+            return newAnime;
+        } else {
+            return false
+        }
     }
 }
 
