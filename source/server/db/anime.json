@@ -36,9 +36,16 @@
     },
     {
         "id": "5",
-        "nombre": "Titans",
-        "genero": "Pop",
-        "año": "2010",
-        "autor": "Carlitos"
+        "nombre": "Samurai X",
+        "genero": "Shonen",
+        "año": "1994",
+        "autor": "Ori Sheroku"
+    },
+    {
+        "id": "6",
+        "nombre": "Riuken",
+        "genero": "Mecha",
+        "año": "2018",
+        "autor": "Naoko Otomo"
     }
 ]

@@ -1,9 +1,16 @@
 
 
-
-
 {{!-- Enviamos data recibida a nuestra tabla --}}
-<section class="">
+<section>
+    {{#if target}}
+        {{>form
+            data=target
+        }}
+    {{else}}
+        <h2>Se produjo un error...</h2>
+    {{/if}}
+</section>
+<section>
     {{#if target}}
         {{>table
             data=target
@@ -12,4 +19,3 @@
         <h2>Se produjo un error...</h2>
     {{/if}}
 </section>
-</div>

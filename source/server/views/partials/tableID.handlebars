@@ -1,7 +1,7 @@
 <section>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table-dark text-center">
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Genero</th>
@@ -10,18 +10,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr class="fw-bold text-center">
                 {{#each data}}
-                <th scope="row">{{this.id}}</th>
-                <td>{{this.nombre}}</td>
-                <td>{{this.genero}}</td>
-                <td>{{this.año}}</td>
-                <td>{{this.autor}}</td>
+                <th class="bgOwn text-light" scope="row">{{this.id}}</th>
+                <td class="bgOwn text-light">{{this.nombre}}</td>
+                <td class="bgOwn text-light">{{this.genero}}</td>
+                <td class="bgOwn text-light">{{this.año}}</td>
+                <td class="bgOwn text-light">{{this.autor}}</td>
                 {{/each}}
             </tr>
         </tbody>
     </table>
 </section>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="/animes">Volver</a>
+</div>
 
 <script>
 

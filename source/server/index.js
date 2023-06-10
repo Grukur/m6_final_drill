@@ -3,41 +3,42 @@ const Anime = require('./controllers/controls')
 
 const PORT = 3000;
 
-app.listen(PORT, () => {
+let server = app.listen(PORT, () => {
     console.log('Server escuchando por puerto ', PORT);
 });
 
 //RUTAS VISTAS
 //Inicio
 app.get(["/", "/home"], (req, res) => {
-    console.log('hoola')
     res.render('home');
 });
 //Acerca
 app.get("/about", (req, res) => {
     res.render('about');
 });
+//para todas las rutas que no existen y cualquier metodo
 
 //Muestra todos los animes
 app.get("/animes", async (req, res) => {
     try {
-
+        
         let raw = new Anime
         let final = await raw.findAll()
-        res.render('allAnimes', {
+        res.status(200).render('allAnimes', {
             target: final
         });
     } catch (error) {
-        res.render('allAnimes', {
+        res.status(200).render('allAnimes', {
             error,
         })
     }
 });
 
 //Muestra anime por ID
-app.get("/animes/:id", async (req, res) => {
+app.get("/anime/:id", async (req, res) => {
     try {
         let id = req.params.id
+        console.log(id)
         let raw = new Anime
         let final = await raw.findById(id)
         console.log(final)
@@ -63,7 +64,7 @@ app.post('/animes', async (req, res) => {
             code: 201,
             message: respuesta
         });
-
+        
     }catch(error){
         console.log(error);
         res.status(500).send({
@@ -102,4 +103,8 @@ app.put('/animes', async (req, res) => {
         console.log(error)
     }
 })
+app.all("*", (req, res) => {
+    res.status(200).send(`Ruta ${req.method} no encontrada.`);
+});
 
+module.exports = server;
