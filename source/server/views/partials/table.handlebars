@@ -27,7 +27,8 @@
                 <td class="bgOwn text-light">{{this.genero}}</td>
                 <td class="bgOwn text-light">{{this.año}}</td>
                 <td class="bgOwn text-light">{{this.autor}}</td>
-                <td class="bgOwn text-light"><a class="btn btn-success detailBtn" href="/anime/{{this.id}}">Detalles</a></td>
+                <td class="bgOwn text-light"><a class="btn btn-success detailBtn" href="/anime/{{this.id}}">Detalles</a>
+                </td>
                 <td class="bgOwn text-light"><a class="btn btn-warning updateBtn">Actualizar</a></td>
                 <td class="bgOwn text-light"><button class="btn btn-danger deleteBtn">Eliminar</button></td>
             </tr>
@@ -87,10 +88,19 @@
             };
 
             fetch("http://localhost:3000/animes/" + id, requestOptions)
-                .then(response => response.json())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-            location.reload();
+                .then(response => {
+                    if (response.status == 200) {
+                        return response.json
+                    } else {
+                        throw new Error("Error al eliminar")
+                    }
+                })
+                .then(result => {
+                    alert(result.message)
+                    location.reload()
+                })
+
+                .catch(error => console.log(error.message));
         });
     }
 
@@ -108,10 +118,15 @@
             };
 
             fetch(`http://localhost:3000/anime/${id}`, requestOptions)
-                .then(response => response.json())
+                .then(response => {
+                    if (response.status == 200) {
+                        return response.json();
+                    } else {
+                        throw new Error("Error al obtener los datos")
+                    }
+                })
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
         });
     }
 </script>
-

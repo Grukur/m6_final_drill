@@ -28,7 +28,7 @@ app.get("/animes", async (req, res) => {
             target: final
         });
     } catch (error) {
-        res.status(200).render('allAnimes', {
+        res.render('allAnimes', {
             error,
         })
     }
@@ -78,9 +78,16 @@ app.delete('/animes/:id', async (req, res) => {
     try{
         let {id} = req.params;
         let trash = new Anime;
-        trash.delete(id);
+        await trash.delete(id);
+        res.status(200).send({
+            message:'Usuario eleminado',
+            code: 200
+        })
     } catch (error){
-        console.log(error)
+        res.status(500).send({
+            message: error,
+            code: 500
+        })
     }
 })
 

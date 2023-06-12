@@ -1,7 +1,6 @@
 //cargamos express y cors
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const { create } = require('express-handlebars');
 
 //ejecutamos express

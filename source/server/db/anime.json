@@ -33,19 +33,5 @@
         "año": "1995",
         "autor": "Yoshiyuki Sadamoto",
         "id": "4"
-    },
-    {
-        "id": "5",
-        "nombre": "Samurai X",
-        "genero": "Shonen",
-        "año": "1994",
-        "autor": "Ori Sheroku"
-    },
-    {
-        "id": "6",
-        "nombre": "Riuken",
-        "genero": "Mecha",
-        "año": "2018",
-        "autor": "Naoko Otomo"
     }
 ]
