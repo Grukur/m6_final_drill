@@ -13,13 +13,17 @@ class Anime {
     
     async findAll() {
         let data = await leerArchivo('anime.json')
-        let base = [];
-        let objetos = await Object.entries(data).map((manga, id) => {
-            let objeto = manga[1]
-            objeto.id = manga[0]
-            base.push(objeto)
-        })
-        return base
+        if (data){
+            let base = [];
+            let objetos = await Object.entries(data).map((manga, id) => {
+                let objeto = manga[1]
+                objeto.id = manga[0]
+                base.push(objeto)
+            })
+            return base
+        } else {
+            console.log('La base de datos está vacia')
+        }
   
     }
 
