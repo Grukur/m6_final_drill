@@ -1,17 +1,23 @@
-<section id="form" class="d-none">
+
+<!--formulario agregar animes-->
+<section id="form" class="form d-none text-light pb-5">
     <div class="w-75 mx-auto">
-        <h2 class="text-center">Formulario de creación de usuarios.</h2>
-        <form id="formCreateUser">
-            <label for="createNombre" class="form-label bgOwn">Nombre</label>
-            <input values="" type="text" name="createNombre" id="createNombre" class="form-control bgOwn" required>
-            <label for="createGenero" class="form-label bgOwn">Genereo</label>
-            <input values="" type="text" name="createGenero" id="createGenero" class="form-control bgOwn" required>
-            <label for="createAño" class="form-label bgOwn">Año</label>
-            <input values="" type="text" name="createAño" id="createAño" class="form-control bgOwn" required>
-            <label for="createAutor" class="form-label bgOwn">Autor</label>
-            <input values="" type="text" name="createAutor" id="createAutor" class="form-control bgOwn" required>
-            <input id="createForm" type="submit" value="Crear" class="btn btn-primary my-2 d-block">
-            <input id="updateform" type="submit" value="Actualizar" class="btn btn-warning my-2 d-block">
+        <div class="text-center mx-auto">
+            <h2 id="titleForm">Formulario de Anime.</h2>
+            <p class="pb-4" id="textForm">*Ingresa todos los datos solicitados.</p>
+        </div>
+
+        <form id="formCreateAnime" class="w-50 text-start mx-auto pb-4">
+            <label for="createNombre" class="form-label px-3">Nombre</label>
+            <input value="" type="text" name="createNombre" id="createNombre" class="form-control" required>
+            <label for="createGenero" class="form-label px-3">Genereo</label>
+            <input value="" type="text" name="createGenero" id="createGenero" class="form-control" required>
+            <label for="createAño" class="form-label px-3">Año</label>
+            <input value="" type="text" name="createAño" id="createAño" class="form-control" required>
+            <label for="createAutor" class="form-label px-3">Autor</label>
+            <input value="" type="text" name="createAutor" id="createAutor" class="form-control" required>
+            <input type="submit" value="Agregar anime" class="btn my-2 d-block" id="createForm">            
+            <input type="submit" value="Actualizar" class="btn my-2 d-block" id="updateForm">
         </form>
     </div>
 </section>
@@ -19,8 +25,8 @@
 
 <script>
     //capturamos el evento submit del formualrio para agregar y modificar
-    let formCreateUser = document.getElementById('formCreateUser')
-    formCreateUser.addEventListener("submit", async (event) => {
+    let formCreateAnime = document.getElementById('formCreateAnime')
+    formCreateAnime.addEventListener("submit", async (event) => {
         event.preventDefault();
         let selector = event.submitter.id
         if (selector == "createForm") {
@@ -47,7 +53,7 @@
                 let data = await response.json();
                 if (data.code == 201) {
                     alert("Usuario creado con éxito.")
-                    formCreateUser.reset();
+                    formCreateAnime.reset();
                     location.reload();
                 } else {
                     throw new Error("Error al guardar los datos en la BD.")
@@ -55,7 +61,7 @@
             } catch (error) {
                 alert(error.message)
             }
-        } else if (selector == 'updateform') {
+        } else if (selector == 'updateForm') {
             console.log('Actualizando Anime');
             try {
                 const raw = JSON.stringify({
@@ -79,7 +85,7 @@
                 let data = await response.json();
                 if (data.code == 200) {
                     alert("Usuario modificado con éxito.")
-                    formCreateUser.reset();
+                    formCreateAnime.reset();
                     location.reload();
                 } else {
                     throw new Error("Error al modificar los datos en la BD.")
@@ -90,3 +96,19 @@
         }
     })
 </script>
+
+
+<style>
+    #createForm, #updateForm{
+        background-color: rgb(226, 55, 140);
+        color: white;
+        text-align: center;
+        margin: 20px auto;
+    }
+    #updateForm:hover, #updateForm:hover{
+        background-color: rgb(228, 145, 186);
+        color: black;
+        text-align: center;
+        margin: 20px auto;
+    }
+</style>

@@ -1,7 +1,8 @@
-<section>
-    <table class="table">
+<section class="container">
+    <h2 class="text-light text-center mx-auto">El anime seleccionado es:</h2>
+    <table class="table table-info table-striped my-5">
         <thead>
-            <tr class="table-dark text-center">
+            <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Genero</th>
@@ -10,24 +11,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="fw-bold text-center">
+            <tr>
                 {{#each data}}
-                <th class="bgOwn text-light" scope="row">{{this.id}}</th>
-                <td class="bgOwn text-light">{{this.nombre}}</td>
-                <td class="bgOwn text-light">{{this.genero}}</td>
-                <td class="bgOwn text-light">{{this.año}}</td>
-                <td class="bgOwn text-light">{{this.autor}}</td>
+                <th scope="row">{{this.id}}</th>
+                <td>{{this.nombre}}</td>
+                <td>{{this.genero}}</td>
+                <td>{{this.año}}</td>
+                <td>{{this.autor}}</td>
                 {{/each}}
             </tr>
         </tbody>
     </table>
+
+    <div class="text-center py-5">
+        <a class="btn pt-2" href="/animes">Volver</a>
+    </div>
+    
 </section>
 
-<div class="text-center">
-    <a class="btn btn-primary" href="/animes">Volver</a>
-</div>
+<style>
+    .btn {
+        background-color: rgb(226, 55, 140);
+        color: white;
+    }
 
-<script>
-
-
-</script>
+    .btn:hover {
+        background-color: rgb(228, 145, 186);
+        color: black;
+    }
+</style>

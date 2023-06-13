@@ -4,33 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     {{! CSS DE BOOTSTRAP }}
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
+    {{! ICONOS BOOTSTRAP }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    {{! FONT NUNITO }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     {{! JS DE BOOTSTRAP }}
     <script defer src="/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="shortcut icon" href="/icono_pagina.ico" type="image/x-icon">
+    <title>App Anime</title>
 </head>
 
-<body class="bgOwn">
+<body>
     {{>navbar
     background="text-bg-dark"
     }}
-    <main class="container">
+    <main class="bg-dark">
         {{{body}}}
     </main>
-
+    {{>footer}}
 </body>
 
 </html>
 
 <style>
-    .bgOwn {
-        background: rgb(100, 164, 105);
-        background: -moz-linear-gradient(0deg, rgba(100, 164, 105, 1) 25%, rgba(130, 130, 130, 1) 100%);
-        background: -webkit-linear-gradient(0deg, rgba(100, 164, 105, 1) 25%, rgba(130, 130, 130, 1) 100%);
-        background: linear-gradient(0deg, rgba(100, 164, 105, 1) 25%, rgba(130, 130, 130, 1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#64a469", endColorstr="#828282", GradientType=1);
-        color: azure;
-
+    body {
+        font-family: 'Nunito', sans-serif;
     }
 </style>

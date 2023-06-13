@@ -13,33 +13,29 @@ class Anime {
     
     async findAll() {
         let data = await leerArchivo('anime.json')
-        if (data){
-            let base = [];
-            let objetos = await Object.entries(data).map((manga, id) => {
-                let objeto = manga[1]
-                objeto.id = manga[0]
-                base.push(objeto)
-            })
-            return base
+        if (data){          
+            return data
         } else {
             console.log('La base de datos está vacia')
-        }
-  
+        }  
     }
 
     async findById(id) {
         let animes = await this.findAll()
-        if(id.length < 3){
-            let result = animes.find(anime => anime.id == id)
-            return result
+        let animeName = animes.find(anime => anime.nombre.toLowerCase() == id.toLowerCase())
+        console.log(animeName)
+        let animeId = animes.find(anime => anime.id== id)
+        if(animeName){
+            return animeName
+        } else if (animeId) {
+            return animeId
         } else {
-            let result = animes.find(anime => anime.genero == id)
-            return result
+            return false
         }
     }
     async create(){
         let results = await this.findAll()
-        let id = uuid().slice(0,2);
+        let id = uuid().slice(0,6);
         let newAnime = {
             id: id,
             nombre: this.nombre,

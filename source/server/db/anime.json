@@ -33,5 +33,26 @@
         "año": "1995",
         "autor": "Yoshiyuki Sadamoto",
         "id": "4"
+    },
+    {
+        "id": "cb887f",
+        "nombre": "jas",
+        "genero": "paloma",
+        "año": "kevin",
+        "autor": "carlos"
+    },
+    {
+        "id": "8a94e0",
+        "nombre": "kevin",
+        "genero": "carlos",
+        "año": "paloma",
+        "autor": "jas"
+    },
+    {
+        "id": "c7cd81",
+        "nombre": "sdas",
+        "genero": "sss",
+        "año": "ssss",
+        "autor": "aaasss"
     }
 ]

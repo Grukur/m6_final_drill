@@ -21,7 +21,7 @@ app.get("/about", (req, res) => {
 //Muestra todos los animes
 app.get("/animes", async (req, res) => {
     try {
-        
+
         let raw = new Anime
         let final = await raw.findAll()
         res.status(200).render('allAnimes', {
@@ -38,10 +38,8 @@ app.get("/animes", async (req, res) => {
 app.get("/anime/:id", async (req, res) => {
     try {
         let id = req.params.id
-        console.log(id)
         let raw = new Anime
         let final = await raw.findById(id)
-        console.log(final)
         res.render('anime', {
             target: [final]
         });
@@ -56,7 +54,7 @@ app.get("/anime/:id", async (req, res) => {
 //Crea anime
 app.post('/animes', async (req, res) => {
     try {
-        let {nombre, genero, año, autor} = req.body;
+        let { nombre, genero, año, autor } = req.body;
         console.log(nombre, genero, año, autor)
         let newAnime = new Anime(nombre, genero, año, autor);
         let respuesta = await newAnime.create();
@@ -64,8 +62,8 @@ app.post('/animes', async (req, res) => {
             code: 201,
             message: respuesta
         });
-        
-    }catch(error){
+
+    } catch (error) {
         console.log(error);
         res.status(500).send({
             code: 500,
@@ -75,15 +73,15 @@ app.post('/animes', async (req, res) => {
 })
 //Elimina anime
 app.delete('/animes/:id', async (req, res) => {
-    try{
-        let {id} = req.params;
+    try {
+        let { id } = req.params;
         let trash = new Anime;
         await trash.delete(id);
         res.status(200).send({
-            message:'Usuario eleminado',
+            message: 'Usuario eleminado',
             code: 200
         })
-    } catch (error){
+    } catch (error) {
         res.status(500).send({
             message: error,
             code: 500
@@ -93,20 +91,20 @@ app.delete('/animes/:id', async (req, res) => {
 
 //Actualiza anime
 app.put('/animes', async (req, res) => {
-    try{
-        let {id, nombre, genero, año, autor} = req.body;
+    try {
+        let { id, nombre, genero, año, autor } = req.body;
         let newUser = new Anime(nombre, genero, año, autor);
         let respuesta = await newUser.update(id);
         console.log(respuesta)
-        if(respuesta){
-            res.status(200).send({ code:200, message:'whohu! Exito!'})
-        }else{
+        if (respuesta) {
+            res.status(200).send({ code: 200, message: 'whohu! Exito!' })
+        } else {
             res.status(500).send({
-                code:500,
-                message:'Algo salió muy mal..... :O'
+                code: 500,
+                message: 'Algo salió muy mal..... :O'
             })
         }
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
 })

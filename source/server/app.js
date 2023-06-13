@@ -27,5 +27,8 @@ app.use(
     express.static(__dirname + "/node_modules/bootstrap/dist/")
 );
 
+//publicamos carpeta public
+app.use(express.static('public'));
+
 //Exportamos modulo
 module.exports = app

@@ -1,21 +1,19 @@
-
-
 {{!-- Enviamos data recibida a nuestra tabla --}}
 <section>
     {{#if target}}
-        {{>form
-            data=target
-        }}
+    {{>table
+    data=target
+    }}
     {{else}}
-        <h2>Se produjo un error...</h2>
+    <h2>Se produjo un error...</h2>
     {{/if}}
 </section>
 <section>
     {{#if target}}
-        {{>table
-            data=target
-        }}
+    {{>form
+    data=target
+    }}
     {{else}}
-        <h2>Se produjo un error...</h2>
+    <h2>Se produjo un error...</h2>
     {{/if}}
 </section>
